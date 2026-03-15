@@ -5,6 +5,7 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { GameProvider, useGame } from "./contexts/GameContext";
+import HomePage from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
 import LessonPage from "./pages/LessonPage";
 import LockerPage from "./pages/LockerPage";
@@ -24,7 +25,7 @@ function AppRouter() {
       <OnboardingPage
         onComplete={() => {
           // Navigate to map after onboarding
-          navigate('/');
+          navigate('/map');
         }}
       />
     );
@@ -32,7 +33,8 @@ function AppRouter() {
 
   return (
     <Switch>
-      <Route path="/" component={MapPage} />
+      <Route path="/" component={HomePage} />
+      <Route path="/map" component={MapPage} />
       <Route path="/lesson/:id" component={LessonPage} />
       <Route path="/locker" component={LockerPage} />
       <Route path="/settings" component={SettingsPage} />
