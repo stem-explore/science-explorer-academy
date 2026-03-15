@@ -137,35 +137,17 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        {/* Simulated video player */}
-        <div style={{ textAlign: 'center', padding: '1.5rem' }}>
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            style={{ fontSize: '3rem', marginBottom: '0.5rem' }}
-          >
-            {lesson.emoji}
-          </motion.div>
-          <div style={{
-            fontFamily: "'Fredoka One', sans-serif",
-            fontSize: '1.2rem',
-            color: 'white',
-            marginBottom: '0.5rem',
-          }}>
-            {lesson.title}
-          </div>
-          <div style={{
-            fontFamily: "'Comic Neue', cursive",
-            fontWeight: 700,
-            fontSize: '0.9rem',
-            color: 'rgba(255,255,255,0.7)',
-            maxWidth: 300,
-            textAlign: 'center',
-            lineHeight: 1.4,
-          }}>
-            🎬 2-minute science animation
-          </div>
-        </div>
+        {/* YouTube Video Embed */}
+        <iframe
+          width="100%"
+          height="100%"
+          src={lesson.hookVideoUrl}
+          title={lesson.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{ display: 'block', border: 'none' }}
+        />
 
         {/* CC badge */}
         <div style={{

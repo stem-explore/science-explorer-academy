@@ -25,6 +25,8 @@ export interface Lesson {
   gameTitle: string;
   focusConcept: string;
   hookFact: string;
+  hookVideoUrl: string;
+  hookVideoCaption: string;
   miniQuiz: QuizQuestion[];
   bossQuiz: QuizQuestion[];
   xpReward: number;
@@ -68,6 +70,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Bubble Pop!',
         focusConcept: 'Air has mass and takes up space',
         hookFact: 'Did you know? Air is REAL stuff! It has weight and fills up space — just like water or rocks!',
+        hookVideoUrl: 'https://www.youtube.com/embed/P3D5CZEey9o?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Air has mass and takes up space, just like water or rocks!',
         miniQuiz: [
           {
             id: 'u1l1q1',
@@ -153,6 +157,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'The Particle Sorter',
         focusConcept: 'Three states of matter: solid, liquid, gas',
         hookFact: 'Everything around you is either a SOLID, LIQUID, or GAS! Can you sort them all before the belt speeds up?',
+        hookVideoUrl: 'https://www.youtube.com/embed/24Yromifcss?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: The three states of matter - solid, liquid, and gas',
         miniQuiz: [
           {
             id: 'u1l2q1',
@@ -238,6 +244,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Thermostat Hero',
         focusConcept: 'Heat and cold change states of matter',
         hookFact: 'Heat is like a superpower! It can turn solid ice into liquid water, and liquid water into gas steam!',
+        hookVideoUrl: 'https://www.youtube.com/embed/3RYdngLrOBc?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: How heat changes matter from solid to liquid to gas',
         miniQuiz: [
           {
             id: 'u1l3q1',
@@ -323,6 +331,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Potion Lab',
         focusConcept: 'Review: states of matter and changes',
         hookFact: 'You are now a SCIENCE WIZARD! Combine everything you learned about matter to brew the ultimate Super Solution!',
+        hookVideoUrl: 'https://www.youtube.com/embed/vNvElea-124?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Combining all three states of matter together',
         miniQuiz: [
           {
             id: 'u1l4q1',
@@ -420,6 +430,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Space Rover',
         focusConcept: 'Forces change direction and speed',
         hookFact: 'Forces are INVISIBLE superpowers! A push or pull can change how fast something moves AND which way it goes!',
+        hookVideoUrl: 'https://www.youtube.com/embed/sva0ZRfFx4k?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Forces are pushes and pulls that change motion',
         miniQuiz: [
           {
             id: 'u2l1q1',
@@ -505,6 +517,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'The Great Snail Race',
         focusConcept: 'Speed is distance over time',
         hookFact: 'Speed is how FAST something moves over time! A cheetah is fast, a snail is slow — but how do we MEASURE it?',
+        hookVideoUrl: 'https://www.youtube.com/embed/1R6MxJpEjfs?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Speed is how fast something moves over time',
         miniQuiz: [
           {
             id: 'u2l2q1',
@@ -590,6 +604,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Drop Test',
         focusConcept: "Gravity pulls everything toward Earth",
         hookFact: "Gravity is Earth's invisible superpower! It pulls EVERYTHING toward the ground — even you, right now!",
+        hookVideoUrl: 'https://www.youtube.com/embed/G7ZAXgo442I?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Gravity is Earth\'s invisible force pulling everything down',
         miniQuiz: [
           {
             id: 'u2l3q1',
@@ -675,6 +691,8 @@ export const UNITS: Unit[] = [
         gameTitle: 'Go-Kart Builder',
         focusConcept: 'Review: forces, motion, speed, and gravity',
         hookFact: 'You have learned the SUPERPOWERS of physics! Now use forces, speed, and gravity to build the ultimate go-kart and WIN the race!',
+        hookVideoUrl: 'https://www.youtube.com/embed/aA_mqSzbkM0?start=0&end=60&modestbranding=1&rel=0',
+        hookVideoCaption: 'Animation: Newton\'s laws of motion and how forces work together',
         miniQuiz: [
           {
             id: 'u2l4q1',
