@@ -93,8 +93,8 @@ function PhaseIndicator({ phase, lessonColor }: { phase: Phase; lessonColor: str
 
 function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
   const [watched, setWatched] = useState(false);
-  const [countdown, setCountdown] = useState(120); // 2 minutes = 120 seconds
-  const [displayTime, setDisplayTime] = useState('2:00');
+  const [countdown, setCountdown] = useState(60); // 1 minute = 60 seconds
+  const [displayTime, setDisplayTime] = useState('1:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -215,7 +215,7 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
         }}>
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: watched ? '100%' : `${((120 - countdown) / 120) * 100}%` }}
+            animate={{ width: watched ? '100%' : `${((60 - countdown) / 60) * 100}%` }}
             style={{ height: '100%', background: lesson.color }}
             transition={{ duration: 0.5 }}
           />
