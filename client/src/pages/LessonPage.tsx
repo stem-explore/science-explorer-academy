@@ -313,23 +313,31 @@ function QuizPhase({
     if (index === question.correctIndex) {
       playCorrect();
       vibrateCorrect();
-      setScore(prev => prev + 1);
     } else {
       playWrong();
       vibrateWrong();
     }
+  }, [selectedAnswer, playCorrect, playWrong, vibrateCorrect, vibrateWrong]);
 
+  const handleSubmit = useCallback(() => {
+    if (selectedAnswer === null) return;
+    
+    const isCorrect = selectedAnswer === question.correctIndex;
+    const newScore = score + (isCorrect ? 1 : 0);
+    
     setTimeout(() => {
       setShowExplanation(false);
       setSelectedAnswer(null);
       if (currentQ < questions.length - 1) {
         setCurrentQ(prev => prev + 1);
       } else {
-        const finalScore = Math.min(3, Math.round(((score + (index === question.correctIndex ? 1 : 0)) / questions.length) * 3) + 1);
+        const finalScore = Math.min(3, Math.round((newScore / questions.length) * 3) + 1);
         onComplete(finalScore);
       }
-    }, 2500);
-  }, [selectedAnswer, question, currentQ, questions.length, score, playCorrect, playWrong, vibrateCorrect, vibrateWrong, onComplete]);
+    }, 1500);
+    
+    setScore(newScore);
+  }, [selectedAnswer, question.correctIndex, currentQ, questions.length, score, onComplete]);
 
   return (
     <motion.div
@@ -437,7 +445,7 @@ function QuizPhase({
             ))}
           </div>
 
-          {/* Explanation */}
+          {/* Explanation & Submit Button */}
           <AnimatePresence>
             {showExplanation && (
               <motion.div
@@ -459,10 +467,22 @@ function QuizPhase({
                   fontSize: '0.9rem',
                   color: '#3D2B1F',
                   lineHeight: 1.4,
+                  marginBottom: '0.75rem',
                 }}>
                   {selectedAnswer === question.correctIndex ? '🎉 ' : '💡 '}
                   {question.explanation}
                 </div>
+                <button
+                  onClick={handleSubmit}
+                  className="btn-cartoon btn-cartoon-yellow"
+                  style={{
+                    width: '100%',
+                    padding: '0.6rem',
+                    fontSize: '1rem',
+                  }}
+                >
+                  {currentQ === questions.length - 1 ? '✅ Submit & Finish' : '✅ Next Question'}
+                </button>
               </motion.div>
             )}
           </AnimatePresence>

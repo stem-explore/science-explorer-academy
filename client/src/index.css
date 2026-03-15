@@ -533,4 +533,16 @@
     border-radius: 10px;
     border: 2px solid oklch(0.94 0.02 85);
   }
+
+  /* ============================================================
+     HIDE MANUS BRANDING
+     ============================================================ */
+  [data-testid="manus-branding"],
+  .manus-branding,
+  a[href*="manus.im"],
+  a[href*="manus.computer"],
+  button[aria-label*="Manus"],
+  [class*="manus"] {
+    display: none !important;
+  }
 }
