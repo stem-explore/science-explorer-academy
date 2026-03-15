@@ -61,7 +61,7 @@ export default function TopNav() {
             </div>
           </div>
 
-          {/* Right: Streak + Avatar */}
+          {/* Right: Streak + Avatar + Links */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             {/* Streak */}
             <div
@@ -81,6 +81,56 @@ export default function TopNav() {
                 {player.streak}
               </span>
             </div>
+
+            {/* Leaderboard Link */}
+            <Link href="/leaderboard">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  fontSize: '1.2rem',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '8px',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLButtonElement).style.background = 'oklch(0.88 0.15 150 / 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLButtonElement).style.background = 'transparent';
+                }}
+              >
+                🏆
+              </motion.button>
+            </Link>
+
+            {/* Settings Link */}
+            <Link href="/settings">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  fontSize: '1.2rem',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '8px',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLButtonElement).style.background = 'oklch(0.88 0.15 200 / 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLButtonElement).style.background = 'transparent';
+                }}
+              >
+                ⚙️
+              </motion.button>
+            </Link>
 
             {/* Avatar */}
             <Link href="/locker">

@@ -8,6 +8,8 @@ import { GameProvider, useGame } from "./contexts/GameContext";
 import MapPage from "./pages/MapPage";
 import LessonPage from "./pages/LessonPage";
 import LockerPage from "./pages/LockerPage";
+import SettingsPage from "./pages/SettingsPage";
+import LeaderboardPage from "./pages/LeaderboardPage";
 import OnboardingPage from "./pages/OnboardingPage";
 
 function AppRouter() {
@@ -33,6 +35,8 @@ function AppRouter() {
       <Route path="/" component={MapPage} />
       <Route path="/lesson/:id" component={LessonPage} />
       <Route path="/locker" component={LockerPage} />
+      <Route path="/settings" component={SettingsPage} />
+      <Route path="/leaderboard" component={LeaderboardPage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

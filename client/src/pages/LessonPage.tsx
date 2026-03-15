@@ -92,11 +92,20 @@ function PhaseIndicator({ phase, lessonColor }: { phase: Phase; lessonColor: str
 }
 
 function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
-  const [watched, setWatched] = useState(false);
-  const [countdown, setCountdown] = useState(60); // 1 minute = 60 seconds
-  const [displayTime, setDisplayTime] = useState('1:00');
+  const { player } = useGame();
+  const [watched, setWatched] = useState(player.teacherSkipMode); // Skip if teacher mode is on
+  const [countdown, setCountdown] = useState(player.teacherSkipMode ? 0 : 60); // 1 minute = 60 seconds
+  const [displayTime, setDisplayTime] = useState(player.teacherSkipMode ? '0:00' : '1:00');
 
   useEffect(() => {
+    // If teacher skip mode is on, immediately mark as watched
+    if (player.teacherSkipMode) {
+      setWatched(true);
+      setCountdown(0);
+      setDisplayTime('0:00');
+      return;
+    }
+
     const timer = setInterval(() => {
       setCountdown(prev => {
         const newCount = prev - 1;
@@ -114,7 +123,7 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [player.teacherSkipMode]);
 
   return (
     <motion.div
@@ -196,7 +205,7 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
           }}
           animate={watched ? { scale: 1.2, color: '#52B788' } : { scale: 1 }}
         >
-          ⏱️ {displayTime}
+          {player.teacherSkipMode ? '⚡ SKIP MODE' : `⏱️ ${displayTime}`}
         </motion.div>
 
         {/* Progress bar */}

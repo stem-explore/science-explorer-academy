@@ -19,6 +19,12 @@ export interface PlayerState {
   earnedBadges: string[];
   unlockedAvatarItems: string[];
   totalStars: number;
+  teacherSkipMode: boolean;
+  currentLessonProgress: {
+    lessonId: string;
+    phase: 'hook' | 'checkin' | 'activity' | 'bossbattle' | 'victory';
+    timestamp: number;
+  } | null;
 }
 
 export interface GameContextType {
@@ -34,6 +40,9 @@ export interface GameContextType {
   currentLessonId: string | null;
   setCurrentLessonId: (id: string | null) => void;
   lessonStars: Record<string, number>;
+  toggleTeacherSkipMode: () => void;
+  saveLessonProgress: (lessonId: string, phase: 'hook' | 'checkin' | 'activity' | 'bossbattle' | 'victory') => void;
+  clearLessonProgress: () => void;
 }
 
 const DEFAULT_PLAYER: PlayerState = {
@@ -48,6 +57,8 @@ const DEFAULT_PLAYER: PlayerState = {
   earnedBadges: [],
   unlockedAvatarItems: [],
   totalStars: 0,
+  teacherSkipMode: false,
+  currentLessonProgress: null,
 };
 
 const XP_PER_LEVEL = 300;
@@ -172,6 +183,25 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('scienceExplorer_stars');
   }, []);
 
+  const toggleTeacherSkipMode = useCallback(() => {
+    setPlayer(prev => ({ ...prev, teacherSkipMode: !prev.teacherSkipMode }));
+  }, []);
+
+  const saveLessonProgress = useCallback((lessonId: string, phase: 'hook' | 'checkin' | 'activity' | 'bossbattle' | 'victory') => {
+    setPlayer(prev => ({
+      ...prev,
+      currentLessonProgress: {
+        lessonId,
+        phase,
+        timestamp: Date.now(),
+      },
+    }));
+  }, []);
+
+  const clearLessonProgress = useCallback(() => {
+    setPlayer(prev => ({ ...prev, currentLessonProgress: null }));
+  }, []);
+
   return (
     <GameContext.Provider value={{
       player,
@@ -186,6 +216,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       currentLessonId,
       setCurrentLessonId,
       lessonStars,
+      toggleTeacherSkipMode,
+      saveLessonProgress,
+      clearLessonProgress,
     }}>
       {children}
     </GameContext.Provider>
