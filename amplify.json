@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "rewrites": [
+      {
+        "source": "<^[^.]+$|\\.(?!js$|css$|gif$|jpg$|jpeg$|png$|svg$|ico$|eot$|otf$|ttf$|woff$|woff2$)[^.]+$>",
+        "target": "/index.html"
+      }
+    ]
+  }
+}
