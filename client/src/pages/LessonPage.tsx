@@ -137,17 +137,30 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        {/* YouTube Video Embed */}
-        <iframe
-          width="100%"
-          height="100%"
-          src={lesson.hookVideoUrl}
-          title={lesson.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          style={{ display: 'block', border: 'none' }}
-        />
+        {/* Video Player - Supports both MP4 and YouTube */}
+        {lesson.hookVideoUrl.includes('.mp4') ? (
+          <video
+            width="100%"
+            height="100%"
+            controls
+            autoPlay
+            style={{ display: 'block', border: 'none', objectFit: 'cover' }}
+          >
+            <source src={lesson.hookVideoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <iframe
+            width="100%"
+            height="100%"
+            src={lesson.hookVideoUrl}
+            title={lesson.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ display: 'block', border: 'none' }}
+          />
+        )}
 
         {/* CC badge */}
         <div style={{
