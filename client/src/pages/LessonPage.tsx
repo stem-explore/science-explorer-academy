@@ -93,17 +93,24 @@ function PhaseIndicator({ phase, lessonColor }: { phase: Phase; lessonColor: str
 
 function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
   const [watched, setWatched] = useState(false);
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(120); // 2 minutes = 120 seconds
+  const [displayTime, setDisplayTime] = useState('2:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown(prev => {
-        if (prev <= 1) {
+        const newCount = prev - 1;
+        if (newCount <= 0) {
           clearInterval(timer);
           setWatched(true);
+          setDisplayTime('0:00');
           return 0;
         }
-        return prev - 1;
+        // Format time as MM:SS
+        const minutes = Math.floor(newCount / 60);
+        const seconds = newCount % 60;
+        setDisplayTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+        return newCount;
       });
     }, 1000);
     return () => clearInterval(timer);
@@ -176,19 +183,41 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
           CC Closed Captions ON
         </div>
 
+        {/* Timer display */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: 16,
+            transform: 'translateY(-50%)',
+            background: 'rgba(0,0,0,0.8)',
+            color: watched ? '#52B788' : '#FFD700',
+            padding: '0.75rem 1rem',
+            borderRadius: 12,
+            fontFamily: "'Fredoka One', sans-serif",
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            border: '2px solid rgba(255,255,255,0.3)',
+          }}
+          animate={watched ? { scale: 1.2, color: '#52B788' } : { scale: 1 }}
+        >
+          ⏱️ {displayTime}
+        </motion.div>
+
         {/* Progress bar */}
         <div style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          height: 4,
+          height: 6,
           background: 'rgba(255,255,255,0.2)',
         }}>
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: watched ? '100%' : `${((5 - countdown) / 5) * 100}%` }}
+            animate={{ width: watched ? '100%' : `${((120 - countdown) / 120) * 100}%` }}
             style={{ height: '100%', background: lesson.color }}
+            transition={{ duration: 0.5 }}
           />
         </div>
       </div>
@@ -221,6 +250,28 @@ function HookPhase({ lesson, onNext }: { lesson: any; onNext: () => void }) {
           </div>
         </div>
       </div>
+
+      {/* Completion message */}
+      {watched && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{
+            background: '#52B788',
+            color: 'white',
+            border: '3px solid #3D2B1F',
+            borderRadius: 14,
+            padding: '0.75rem',
+            marginBottom: '1rem',
+            textAlign: 'center',
+            fontFamily: "'Fredoka One', sans-serif",
+            fontSize: '1.1rem',
+            boxShadow: '4px 4px 0 #3D2B1F',
+          }}
+        >
+          ✅ Video watched! Ready to learn?
+        </motion.div>
+      )}
 
       <button
         onClick={onNext}
