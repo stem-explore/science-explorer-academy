@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import TopNav from '@/components/TopNav';
 
-const HERO_MAP_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663440693124/LRCQh74urLCPMmK8QUgPSZ/hero-map-bg-PzaJoMnTi79smJQ955qMvL.webp';
+const HERO_MAP_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663440693124/LRCQh74urLCPMmK8QUgPSZ/map-background-stem-9m94GXy9tBDUMwpe5Fy2jm.webp';
 const OWL_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663440693124/LRCQh74urLCPMmK8QUgPSZ/avatar-scientist-A5DxgHtRoTEVyXzf5WmEy5.webp';
 
 function StarRating({ stars, max = 3 }: { stars: number; max?: number }) {
